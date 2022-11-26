@@ -1,17 +1,66 @@
-﻿using System;
+﻿using Defi_Lecture_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace Defi_Lecture_API.Controllers
 {
-    public class QuestionController : Controller
+    public class QuestionController : ApiController
     {
-        // GET: Question
-        public ActionResult Index()
+        //Initialisation de la liste des questions
+        public QuestionController()
         {
-            return View();
+            QuestionsDao.Remplir();
+        }
+
+
+        //Trouver tous les questions
+        // GET api/<controller>
+        public IEnumerable<Question> Get()
+        {
+            return QuestionsDao.FindAll();
+        }
+
+        //Trouver les question par idQuestion :
+        public IHttpActionResult Get(int idQuestion)
+        {
+            Question question = QuestionsDao.FindByIdQuestion(idQuestion);
+                if (question != null)
+                {
+                return this.Ok(question);
+                }
+                else
+                {
+                    return this.NotFound();
+                }
+        }
+
+        //Trouver tous les bonnes réponses :
+
+        //Trouver tous les mauvaises réponses :
+
+        //Ajout de question :
+        // POST api/<controller>
+        public void Post(Question question)
+        {
+            QuestionsDao.Ajouter(question);
+        }
+
+        //Modification de question :
+        // PUT api/<controller>/5
+        public void Put(Question question)
+        {
+            QuestionsDao.Modifier(question);
+        }
+
+        //Suppression de question :
+        // DELETE api/<controller>/9584512
+        public bool Delete(int idQuestion)
+        {
+            return QuestionsDao.Supprimer(idQuestion);
         }
     }
 }
