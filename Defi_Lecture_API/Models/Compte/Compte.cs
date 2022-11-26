@@ -24,7 +24,8 @@ namespace Defi_Lecture_API.Models
         [DataMember]
         public string pseudo { get; set; }
         [DataMember]
-        public string role { get; set; }
+        //role: 1 = participant, 2 = capitaine, 3 = moderateur , 4 = administrateur
+        public int role { get; set; }
         [DataMember]
         public string avatar { get; set; }
         [DataMember]

@@ -16,9 +16,10 @@ namespace Defi_Lecture_API.Controllers
             if (comptes == null)
             {
                 comptes = new List<Compte>();
-                comptes.Add(new Compte { idCompte = 01, idEquipe = 001, courriel = "bob@gmail.com", motDePasse = "12345", nom = "Marley", prenom = "Bob", pseudo = "Prof", role = "Professeur", avatar = "tête-de-mort.png", point = 15, programme = "Info", devenirCapitaine = true });
-                comptes.Add(new Compte { idCompte = 02, idEquipe = 001, courriel = "max@gmail.com", motDePasse = "12345", nom = "Reinhart", prenom = "Max", pseudo = "Étu1", role = "Étudiant", avatar = "tête-de-mort.png", point = 30, programme = "Info", devenirCapitaine = false });
-                comptes.Add(new Compte { idCompte = 03, idEquipe = 001, courriel = "tom@gmail.com", motDePasse = "12345", nom = "Shelbey", prenom = "Tom", pseudo = "Étu2", role = "Étudiant", avatar = "tête-de-mort.png", point = 60, programme = "Info", devenirCapitaine = false });
+                comptes.Add(new Compte { idCompte = 01, idEquipe = 001, courriel = "bob@gmail.com", motDePasse = "12345", nom = "Marley", prenom = "Bob", pseudo = "Prof", role =  2, avatar = "tête-de-mort.png", point = 15, programme = "Info", devenirCapitaine = true });
+                comptes.Add(new Compte { idCompte = 02, idEquipe = 001, courriel = "max@gmail.com", motDePasse = "12345", nom = "Reinhart", prenom = "Max", pseudo = "Étu1", role = 1, avatar = "tête-de-mort.png", point = 30, programme = "Info", devenirCapitaine = false });
+                comptes.Add(new Compte { idCompte = 03, idEquipe = 001, courriel = "tom@gmail.com", motDePasse = "12345", nom = "Shelbey", prenom = "Tom", pseudo = "Étu2", role = 1, avatar = "tête-de-mort.png", point = 60, programme = "Info", devenirCapitaine = false });
+
             }
         }
 
