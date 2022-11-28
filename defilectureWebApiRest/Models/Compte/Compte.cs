@@ -4,13 +4,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace defilectureWebApiRest.Models.Compte
+namespace defilectureWebApiRest.Models
 {
     [DataContract]
     public class Compte
     {
         [DataMember]
-        public int IdCompte { get; }
+        public int idCompte { get; set; }
         [DataMember]
         public int idEquipe { get; set; }
         [DataMember]
@@ -37,7 +37,7 @@ namespace defilectureWebApiRest.Models.Compte
 
         public override string ToString()
         {
-            return string.Format("Numero: {}, Nom: {}, Prenom: {}, Courriel:  {}, Points: {} ", IdCompte, nom, prenom, courriel, point);
+            return string.Format("Numero: {}, Nom: {}, Prenom: {}, Courriel:  {}, Points: {} ", idCompte, nom, prenom, courriel, point);
         }
 
     }
