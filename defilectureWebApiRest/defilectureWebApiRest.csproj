@@ -199,7 +199,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ComptesController.cs" />
+    <Compile Include="Controllers\CompteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
@@ -207,8 +207,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Compte\Compte.cs" />
+    <Compile Include="Models\Compte\CompteDataProvider.cs" />
+    <Compile Include="Models\Compte\ComptesDao.cs" />
     <Compile Include="Models\Lecture\Lecture.cs" />
     <Compile Include="Models\Lecture\LectureDataProvider.cs" />
+    <Compile Include="Models\Question\Question.cs" />
+    <Compile Include="Models\Question\QuestionsDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

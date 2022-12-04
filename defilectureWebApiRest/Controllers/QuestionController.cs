@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace defilectureWebApiRest.Controllers
 {
+    /*
     public class QuestionController : ApiController
     {
         //Initialisation de la liste des questions
@@ -63,5 +64,5 @@ namespace defilectureWebApiRest.Controllers
             return QuestionsDao.Supprimer(idQuestion);
         }
     }
-
+    */
 }
