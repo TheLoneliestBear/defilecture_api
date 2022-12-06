@@ -2,13 +2,13 @@
 using System.Linq;
 using defilectureWebApiRest.Models;
 
-namespace defilectureWebApiRest.Models
+namespace defilectureWebApiRest.Models.Compte
 {
     public class ComptesDao
     {
         //Implémenter la bd
-
-        static List<Compte> comptes;
+        /**
+        static List<ComptesDao> comptes;
 
         public static void Remplir()
         {
@@ -73,6 +73,6 @@ namespace defilectureWebApiRest.Models
         //Se connecter
 
         //s'inscrire
-
+        **/
     }
 }

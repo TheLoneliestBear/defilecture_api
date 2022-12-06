@@ -1,10 +1,11 @@
 ﻿using defilectureWebApiRest.Models;
+using defilectureWebApiRest.Models.Compte;
+using defilectureWebApiRest.Models.Lecture;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace defilectureWebApiRest.Controllers
 {
@@ -13,32 +14,35 @@ namespace defilectureWebApiRest.Controllers
         //Initialisation de la liste des comptes
         public CompteController()
         {
-            ComptesDao.Remplir();
+           // ComptesDao.Remplir();
         }
 
+        [HttpGet]
+        [Route("api/Compte/{pseudo}/{mdp}")]
+        public Compte Get(string pseudo, string mdp)
+        {
+            return CompteDataProvider.FindCompteByPseudoMdp(pseudo,mdp);
+        }
 
+        /*
         //Trouver tous les comptes
         // GET api/<controller>
         public IEnumerable<Compte> Get()
         {
             return ComptesDao.FindAll();
         }
+        */
 
 
-        //Trouver compte par idCompte :
-        public IHttpActionResult Get(int idCompte)
+        //Trouver compte par id :
+        [HttpGet]
+        [Route("api/Compte/{id}")]
+        public Compte Get(int id)
         {
-            Compte compte = ComptesDao.FindByIdCompte(idCompte);
-            if (compte != null)
-            {
-                return this.Ok(compte);
-            }
-            else
-            {
-                return this.NotFound();
-            }
+                return CompteDataProvider.FindByIdCompte(id);
         }
-
+       
+        /*
         //Trouver compte par idEquipe :
 
         //Trouver compte par courriel :
@@ -75,7 +79,7 @@ namespace defilectureWebApiRest.Controllers
         {
             return ComptesDao.Supprimer(idCompte);
         }
-
+ */
         //Se connecter :
 
         //S'inscrire :

@@ -23,5 +23,7 @@ namespace defilectureWebApiRest.Controllers
         {
             return LectureDataProvider.GetById(id);
         }
+
+
     }
 }
