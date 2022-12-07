@@ -1,4 +1,5 @@
 ﻿using defilectureWebApiRest.Models;
+using defilectureWebApiRest.Models.Compte;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,14 @@ namespace defilectureWebApiRest.Controllers
             }
         }
 
-        //Trouver compte par idEquipe :
+        //Trouver comptes par idEquipe :
+        public IEnumerable<Compte> GetByIdEquipe(int idEquipe)
+        {
+            return CompteDataProvider.GetListeCompteDansUneEquipe(idEquipe);
+        }
+            
+            
+
 
         //Trouver compte par courriel :
 

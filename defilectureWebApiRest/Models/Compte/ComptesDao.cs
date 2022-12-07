@@ -2,7 +2,7 @@
 using System.Linq;
 using defilectureWebApiRest.Models;
 
-namespace defilectureWebApiRest.Models
+namespace defilectureWebApiRest.Models.Compte
 {
     public class ComptesDao
     {
