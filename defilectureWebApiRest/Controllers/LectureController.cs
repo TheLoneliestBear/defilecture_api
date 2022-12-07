@@ -23,5 +23,11 @@ namespace defilectureWebApiRest.Controllers
         {
             return LectureDataProvider.GetById(id);
         }
+
+        //Suppression lecture
+        public bool Delete(int id)
+        {
+            return LectureDataProvider.Supprimer(id);
+        }
     }
 }

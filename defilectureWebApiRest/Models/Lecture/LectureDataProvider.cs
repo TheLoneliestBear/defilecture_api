@@ -77,6 +77,26 @@ namespace defilectureWebApiRest.Models.Lecture
             cnx.Close();
             return liste;
         }
+        public static bool Supprimer(int idLivre)
+        {
+
+            DbConnection cnx = new MySqlConnection();
+            cnx.ConnectionString = connectionString;
+            cnx.Open();
+            DbCommand cmd = cnx.CreateCommand();
+            cmd.CommandText = "DELETE FROM lecture WHERE ID_LECTURE = @idLivre";
+            DbParameter param;
+            param = new MySqlParameter
+            {
+                ParameterName = "idLivre",
+                DbType = System.Data.DbType.Int32,
+                Value = idLivre
+            };
+            cmd.Parameters.Add(param);
+            bool res = cmd.ExecuteNonQuery() > 0;
+            cnx.Close();
+            return res;
+        }
 
     }
 }
