@@ -27,7 +27,7 @@ namespace defilectureWebApiRest.Models.Compte
             DbParameter param = new MySqlParameter
             {
                 ParameterName = "id_Equipe",
-                DbType = System.Data.DbType.Int16,
+                DbType = System.Data.DbType.Int32,
                 Value = id_Equipe
             };
             cmd.Parameters.Add(param);
@@ -225,7 +225,7 @@ namespace defilectureWebApiRest.Models.Compte
             DbParameter param = new MySqlParameter
             {
                 ParameterName = "role",
-                DbType = System.Data.DbType.String,
+                DbType = System.Data.DbType.Int32,
                 Value = role
             };
             cmd.Parameters.Add(param);
