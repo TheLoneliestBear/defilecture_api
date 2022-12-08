@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using defilectureWebApiRest.Models.Compte;
 using MySql.Data.MySqlClient;
 
 namespace defilectureWebApiRest.Models.DemandeEquipe
 {
-    public class EquipeDataProvider
+    public class DemandeEquipeDataProvider
     {
 
         private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
@@ -38,6 +39,34 @@ namespace defilectureWebApiRest.Models.DemandeEquipe
             bool res = cmd.ExecuteNonQuery() > 0;
             cnx.Close();
             return res;
+        }
+
+        public static List<DemandeEquipe> getDemandes() 
+        {
+            List<DemandeEquipe> demandeListe = new List<DemandeEquipe>();
+            DemandeEquipe demandeEquipe;
+            DbConnection conn = new MySqlConnection();
+            conn.ConnectionString = connectionString;
+            conn.Open();
+
+            DbCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "SELECT * FROM demande_equipe";
+            DbDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                demandeEquipe = new DemandeEquipe()
+                {
+                    idDemande = (int)dr["ID_DEMANDE_EQUIPE"],
+                    idCompte = (int)dr["ID_COMPTE"],
+                    idEquipe = (int)dr["ID_EQUIPE"],
+                    point = (int)dr["POINT"],
+                    statutDemande = (int)dr["STATUT_DEMANDE"]
+                };
+                demandeListe.Add(demandeEquipe);
+            }
+            conn.Close();
+            return demandeListe;
         }
 
         public static DemandeEquipe afficherDemandeSelonIdCompte(int idCompte)
@@ -72,13 +101,16 @@ namespace defilectureWebApiRest.Models.DemandeEquipe
             return null;
         }
 
-        public static DemandeEquipe afficherDemandeSelonIdEquipe (int idEquipe) 
+        public static List<DemandeEquipe> afficherDemandeSelonIdEquipe (int idEquipe) 
         {
+            List<DemandeEquipe> demandeListe = new List<DemandeEquipe>();
             DemandeEquipe demandeEquipe;
-            DbConnection cnx = new MySqlConnection();
-            cnx.ConnectionString = connectionString;
-            cnx.Open();
-            DbCommand cmd = cnx.CreateCommand();
+            DbConnection conn = new MySqlConnection();
+            conn.ConnectionString = connectionString;
+            conn.Open();
+
+            DbCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
             cmd.CommandText = "SELECT * FROM demande_equipe WHERE ID_COMPTE=@idEquipe";
             DbParameter param = new MySqlParameter
             {
@@ -88,9 +120,9 @@ namespace defilectureWebApiRest.Models.DemandeEquipe
             };
             cmd.Parameters.Add(param);
             DbDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            while (dr.Read())
             {
-                demandeEquipe = new DemandeEquipe
+                demandeEquipe = new DemandeEquipe()
                 {
                     idDemande = (int)dr["ID_DEMANDE_EQUIPE"],
                     idCompte = (int)dr["ID_COMPTE"],
@@ -98,10 +130,10 @@ namespace defilectureWebApiRest.Models.DemandeEquipe
                     point = (int)dr["POINT"],
                     statutDemande = (int)dr["STATUT_DEMANDE"]
                 };
-                return demandeEquipe;
+                demandeListe.Add(demandeEquipe);
             }
-            cnx.Close();
-            return null;
+            conn.Close();
+            return demandeListe;
 
         }
 
