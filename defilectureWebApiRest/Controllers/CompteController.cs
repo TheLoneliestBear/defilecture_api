@@ -45,23 +45,82 @@ namespace defilectureWebApiRest.Controllers
         {
             return CompteDataProvider.GetListeCompteDansUneEquipe(idEquipe);
         }
-            
-            
 
 
         //Trouver compte par courriel :
+        public IHttpActionResult getByCourriel(string courriel)
+        {
+            Compte compte = CompteDataProvider.FindByCourriel(courriel);
+            if (compte != null)
+            {
+                return this.Ok(compte);
+            }
+            else
+            {
+                return this.NotFound();
+            }
+        }
 
         //Trouver compte par nom :
+        public IHttpActionResult getByNom(string nom)
+        {
+            Compte compte = CompteDataProvider.FindByNom(nom);
+            if (compte != null)
+            {
+                return this.Ok(compte);
+            }
+            else
+            {
+                return this.NotFound();
+            }
+        }
+
 
         //Trouver compte par prenom :
+        public IHttpActionResult getByPrenom(string prenom)
+        {
+            Compte compte = CompteDataProvider.FindByPrenom(prenom);
+            if (compte != null)
+            {
+                return this.Ok(compte);
+            }
+            else
+            {
+                return this.NotFound();
+            }
+        }
 
         //Trouver compte par pseudo :
+        public IHttpActionResult getByPseudo(string pseudo)
+        {
+            Compte compte = CompteDataProvider.FindByPseudo(pseudo);
+            if (compte != null)
+            {
+                return this.Ok(compte);
+            }
+            else
+            {
+                return this.NotFound();
+            }
+        }
 
         //Trouver compte par role :
+        public IEnumerable<Compte> GetByRole(int role)
+        {
+            return CompteDataProvider.GetComptesByRole(role);
+        }
 
         //Trouver compte par programme :
+        public IEnumerable<Compte> GetByProgramme(string programme)
+        {
+            return CompteDataProvider.GetComptesByProgramme(programme);
+        }
 
         //Trouver compte par Capitaine:
+        public IEnumerable<Compte> GetByCapitaine(bool capitaine)
+        {
+            return CompteDataProvider.GetComptesByCapitaine(capitaine);
+        }
 
         //Ajout de compte :
         // POST api/<controller>
