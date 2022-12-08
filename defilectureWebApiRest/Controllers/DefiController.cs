@@ -17,5 +17,13 @@ namespace defilectureWebApiRest.Controllers
         {
             return DefiDataProvider.FindByIdDefi(id);
         }
+
+        //Valider Reponse par idDefi :
+        [HttpGet]
+        [Route("api/Defi/{essai}-{id}")]
+        public bool ValiderReponse(String essai, int id)
+        {
+            return DefiDataProvider.ValiderReponseDefi(essai, id);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace defilectureWebApiRest.Models.Defi
                     description = dr["DESCRIPTION"].ToString(),
                     dateDebut = dr["DATE_DEBUT"].ToString(),
                     dateFin = dr["DATE_FIN"].ToString(),
-                    question = dr["QUESTION"].ToString(),
+                    questions = dr["QUESTION"].ToString(),
                     choixReponseA = dr["CHOIX_REPONSE_A"].ToString(),
                     choixReponseB = dr["CHOIX_REPONSE_B"].ToString(),
                     choixReponseC = dr["CHOIX_REPONSE_C"].ToString(),
@@ -49,6 +49,29 @@ namespace defilectureWebApiRest.Models.Defi
             }
             cnx.Close();
             return null;
+        }
+
+        public static Boolean ValiderReponseDefi(String essai, int idDefi) {
+            DbConnection cnx = new MySqlConnection();
+            cnx.ConnectionString = connectionString;
+            cnx.Open();
+            DbCommand cmd = cnx.CreateCommand();
+            cmd.CommandText = "SELECT REPONSE FROM defi_reponse WHERE ID_DEFI =@id";
+            DbParameter param = new MySqlParameter
+            {
+                ParameterName = "id",
+                DbType = System.Data.DbType.Int32,
+                Value = idDefi
+            };
+            cmd.Parameters.Add(param);
+            DbDataReader dr = cmd.ExecuteReader();
+            if (dr.Read()) {
+                String reponse = dr["REPONSE"].ToString();
+                if (reponse == essai) { return true; }
+                else { return false; }
+            }
+            cnx.Close();
+            return false;
         }
 
     }

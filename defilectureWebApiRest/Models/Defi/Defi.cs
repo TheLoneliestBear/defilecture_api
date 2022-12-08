@@ -22,7 +22,7 @@ namespace defilectureWebApiRest.Models.Defi
         [DataMember]
         public string dateFin { get; set; }
         [DataMember]
-        public string question { get; set; }
+        public string questions { get; set; }
         [DataMember]
         public string choixReponseA { get; set; }
         [DataMember]
@@ -36,8 +36,8 @@ namespace defilectureWebApiRest.Models.Defi
 
         public override string ToString()
         {
-            return string.Format(" Defi # : {}, Compte # : {}, Nom: {}, Description: {}, Date du Debut : {}, Date de Fin : {}, Question: {}, Reponse A: {}, Reponse B : {}, Reponse C: {}, Reponse D: {}, Valeur Minutes : {}",
-                idDefi, idCompte, nom, description, dateDebut, dateFin, question, choixReponseA, choixReponseB, choixReponseC, choixReponseD, valeurMinute);
+            return string.Format(" Defi # : {}, Compte # : {}, Nom: {}, Description: {}, Date du Debut : {}, Date de Fin : {}, Questions : {}, Reponse A : {}, Reponse B : {}, Reponse C : {}, Reponse D : {}, Valeur Minutes : {}",
+                idDefi, idCompte, nom, description, dateDebut, dateFin, questions, choixReponseA, choixReponseB, choixReponseC, choixReponseD, valeurMinute);
         }
     }
 }
