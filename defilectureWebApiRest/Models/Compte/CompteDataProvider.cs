@@ -12,7 +12,7 @@ namespace defilectureWebApiRest.Models.Compte
 {
     public class CompteDataProvider
     {
-        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
+        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=;Database=defilecture";
 
         public static List<Compte> GetComptes()
         {
@@ -461,103 +461,18 @@ namespace defilectureWebApiRest.Models.Compte
             return compteListe;
         }
 
-        public static bool AjouterCompte(Compte compte)
+        public static void AjouterCompte(Compte compte)
         {
 
             DbConnection cnx = new MySqlConnection();
             cnx.ConnectionString = connectionString;
             cnx.Open();
             DbCommand cmd = cnx.CreateCommand();
-            cmd.CommandText = "INSERT INTO compte(ID_COMPTE, ID_EQUIPE, COURRIEL, MOT_PASSE, NOM, PRENOM, PSEUDONYME, ROLE, AVATAR, Point, PROGRAMME_ETUDE, DEVENIR_CAPITAINE) " +
-                                       "VALUES (@idCompte, @idEquipe, @courriel, @motDePasse, @nom, @prenom, @pseudo, @role, @avatar, @point, @programme, @devenirCapitaine)";
-            DbParameter param;
-            param = new MySqlParameter
-            {
-                ParameterName = "idCompte",
-                DbType = System.Data.DbType.String,
-                Value = compte.idCompte
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "idEquipe",
-                DbType = System.Data.DbType.String,
-                Value = compte.idEquipe
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "courriel",
-                DbType = System.Data.DbType.String,
-                Value = compte.courriel
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "motDePasse",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.motDePasse
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "nom",
-                DbType = System.Data.DbType.String,
-                Value = compte.nom
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "prenom",
-                DbType = System.Data.DbType.String,
-                Value = compte.prenom
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "pseudo",
-                DbType = System.Data.DbType.String,
-                Value = compte.pseudo
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "role",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.role
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "avatar",
-                DbType = System.Data.DbType.String,
-                Value = compte.avatar
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "point",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.point
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "programme",
-                DbType = System.Data.DbType.String,
-                Value = compte.programme
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "devenirCapitaine",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.devenirCapitaine
-            };
-            cmd.Parameters.Add(param);
-            bool res = cmd.ExecuteNonQuery() > 0;
+            cmd.CommandText =
+                $"INSERT INTO compte(ID_COMPTE, ID_EQUIPE, COURRIEL, MOT_PASSE, NOM, PRENOM, PSEUDONYME, ROLE, AVATAR, Point, PROGRAMME_ETUDE) VALUES ('{compte.idCompte}','{compte.idEquipe}', '{compte.courriel}', '{compte.motDePasse}', '{compte.nom}', '{compte.prenom}', '{compte.pseudo}', '{compte.role}', '{compte.avatar}', '{compte.point}', '{compte.programme}')";
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
             cnx.Close();
-            return res;
         }
 
         public static bool ModifierCompte(Compte compte)
@@ -567,20 +482,22 @@ namespace defilectureWebApiRest.Models.Compte
             cnx.ConnectionString = connectionString;
             cnx.Open();
             DbCommand cmd = cnx.CreateCommand();
-            cmd.CommandText = "UPDATE book SET ID_EQUIPE=@idEquipe,COURRIEL=@courriel,MOT_PASSE=@motDePasse,NOM=@nom,PRENOM=@prenom, PSEUDONYME=@pseudo, ROLE=@role, AVATAR=@avatar, Point=@point, PROGRAMME_ETUDE=@programme, DEVENIR_CAPITAINE=@devenirCapitaine " +
+            cmd.CommandText = "UPDATE compte SET ID_EQUIPE=@idEquipe,COURRIEL=@courriel,MOT_PASSE=@motDePasse,NOM=@nom,PRENOM=@prenom," +
+                " PSEUDONYME=@pseudo, ROLE=@role, AVATAR=@avatar, Point=@point, PROGRAMME_ETUDE=@programme, " +
+                "DEVENIR_CAPITAINE=@devenirCapitaine " +
                               "WHERE ID_COMPTE=@idCompte";
             DbParameter param;
             param = new MySqlParameter
             {
                 ParameterName = "idCompte",
-                DbType = System.Data.DbType.String,
-                Value = compte.idCompte
+                DbType = System.Data.DbType.Int32,
+                Value = compte.idEquipe
             };
             cmd.Parameters.Add(param);
             param = new MySqlParameter
             {
                 ParameterName = "idEquipe",
-                DbType = System.Data.DbType.String,
+                DbType = System.Data.DbType.Int32,
                 Value = compte.idEquipe
             };
             cmd.Parameters.Add(param);
@@ -594,7 +511,7 @@ namespace defilectureWebApiRest.Models.Compte
             param = new MySqlParameter
             {
                 ParameterName = "motDePasse",
-                DbType = System.Data.DbType.Int32,
+                DbType = System.Data.DbType.String,
                 Value = compte.motDePasse
             };
             cmd.Parameters.Add(param);
@@ -650,7 +567,7 @@ namespace defilectureWebApiRest.Models.Compte
             param = new MySqlParameter
             {
                 ParameterName = "devenirCapitaine",
-                DbType = System.Data.DbType.Int32,
+                DbType = System.Data.DbType.Boolean,
                 Value = compte.devenirCapitaine
             };
             cmd.Parameters.Add(param);

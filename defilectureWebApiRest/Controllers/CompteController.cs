@@ -65,9 +65,9 @@ namespace defilectureWebApiRest.Controllers
 
         //Ajout de compte :
         // POST api/<controller>
-        public bool Post(Compte compte)
+        public void Post(Compte compte)
         {
-            return CompteDataProvider.AjouterCompte(compte);
+            CompteDataProvider.AjouterCompte(compte);
         }
 
 
