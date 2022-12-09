@@ -6,15 +6,28 @@
 //using System.Web.Http;
 //using System.Web.Mvc;
 
-namespace defilectureWebApiRest.Controllers
-{
-    public class QuestionController : ApiController
-    {
-        //Initialisation de la liste des questions
-        public QuestionController()
-        {
-            QuestionsDao.Remplir();
-        }
+
+//namespace defilectureWebApiRest.Controllers
+//{
+//    public class QuestionController : ApiController
+//    {
+//        //Initialisation de la liste des questions
+//        public QuestionController()
+//        {
+//            QuestionsDao.Remplir();
+//        }
+
+//namespace defilectureWebApiRest.Controllers
+//{
+//    /*
+//    public class QuestionController : ApiController
+//    {
+//        Initialisation de la liste des questions
+//        public QuestionController()
+//        {
+//            QuestionsDao.Remplir();
+//        }
+
 
 
 //        //Trouver tous les questions
@@ -56,12 +69,24 @@ namespace defilectureWebApiRest.Controllers
 //            QuestionsDao.Modifier(question);
 //        }
 
-        //Suppression de question :
-        // DELETE api/<controller>/9584512
-        public bool Delete(int idQuestion)
-        {
-            return QuestionsDao.Supprimer(idQuestion);
-        }
-    }
 
-}
+//        //Suppression de question :
+//        // DELETE api/<controller>/9584512
+//        public bool Delete(int idQuestion)
+//        {
+//            return QuestionsDao.Supprimer(idQuestion);
+//        }
+//    }
+
+//}
+
+//        Suppression de question :
+//         DELETE api/<controller>/9584512
+//        public bool Delete(int idQuestion)
+//        {
+//            return QuestionsDao.Supprimer(idQuestion);
+//        }
+//    }
+//    */
+//}
+
