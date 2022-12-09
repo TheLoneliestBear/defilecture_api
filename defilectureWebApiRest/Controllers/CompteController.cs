@@ -1,4 +1,5 @@
 ﻿using defilectureWebApiRest.Models.Compte;
+using defilectureWebApiRest.Models.Lecture;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,16 @@ namespace defilectureWebApiRest.Controllers
 
         //Trouver compte par courriel :
         [Route("api/Comptes/courriel/{courriel}")]
-        public IHttpActionResult GetByCourriel(string courriel)
+        public Compte GetByCourriel(string courriel)
         {
+            return CompteDataProvider.FindByCourriel(courriel);
+        }
 
-            return CompteDataProvider.FindByCourriel(string courriel);
+        //Trouver tout les comptes : 
+        [Route("api/Comptes")]
+        public IEnumerable<Compte> Get()
+        {
+            return CompteDataProvider.GetComptes();
         }
 
 
@@ -34,7 +41,53 @@ namespace defilectureWebApiRest.Controllers
         {
                 return CompteDataProvider.FindByIdCompte(id);
         }
-       
+
+        //Trouver compte par role :
+        [Route("api/Comptes/role/{role}")]
+        public IEnumerable<Compte> GetByRole(int role)
+        {
+            return CompteDataProvider.GetComptesByRole(role);
+        }
+
+        //Trouver compte par programme :
+        [Route("api/Comptes/programme/{programme}")]
+        public IEnumerable<Compte> GetByProgramme(string programme)
+        {
+            return CompteDataProvider.GetComptesByProgramme(programme);
+        }
+
+        //Trouver compte par Capitaine:
+        [Route("api/Comptes/capitaine/{capitaine}")]
+        public IEnumerable<Compte> GetByCapitaine(bool capitaine)
+        {
+            return CompteDataProvider.GetComptesByCapitaine(capitaine);
+        }
+
+        //Ajout de compte :
+        // POST api/<controller>
+        public bool Post(Compte compte)
+        {
+            return CompteDataProvider.AjouterCompte(compte);
+        }
+
+
+
+        //Modification de compte :
+        // PUT api/<controller>/5
+        public bool Put(Compte compte)
+        {
+            return CompteDataProvider.ModifierCompte(compte);
+        }
+
+
+
+        //Suppression de compte :
+        // DELETE api/<controller>/9584512  
+        public bool Delete(int idCompte)
+        {
+            return CompteDataProvider.SupprimerCompte(idCompte);
+        }
+
         /*
         //Trouver compte par idEquipe :
 
@@ -97,26 +150,7 @@ namespace defilectureWebApiRest.Controllers
             }
         }
 
-        //Trouver compte par role :
-        [Route("api/Comptes/role/{role}")]
-        public IEnumerable<Compte> GetByRole(int role)
-        {
-            return CompteDataProvider.GetComptesByRole(role);
-        }
-
-        //Trouver compte par programme :
-        [Route("api/Comptes/programme/{programme}")]
-        public IEnumerable<Compte> GetByProgramme(string programme)
-        {
-            return CompteDataProvider.GetComptesByProgramme(programme);
-        }
-
-        //Trouver compte par Capitaine:
-        [Route("api/Comptes/capitaine/{capitaine}")]
-        public IEnumerable<Compte> GetByCapitaine(bool capitaine)
-        {
-            return CompteDataProvider.GetComptesByCapitaine(capitaine);
-        }
+        
 
         //Ajout de compte :
         // POST api/<controller>
