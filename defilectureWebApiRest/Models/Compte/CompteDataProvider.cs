@@ -13,6 +13,45 @@ namespace defilectureWebApiRest.Models.Compte
 
         private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
 
+        public static Compte FindByIdCompte(int id)
+        {
+            Compte c;
+            DbConnection cnx = new MySqlConnection();
+            cnx.ConnectionString = connectionString;
+            cnx.Open();
+            DbCommand cmd = cnx.CreateCommand();
+            cmd.CommandText = "SELECT * FROM compte WHERE ID_COMPTE =@id";
+            DbParameter param = new MySqlParameter
+            {
+                ParameterName = "id",
+                DbType = System.Data.DbType.Int32,
+                Value = id
+            };
+            cmd.Parameters.Add(param);
+            DbDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                c = new Compte
+                {
+                    idCompte = Convert.ToInt32(dr["ID_COMPTE"]),
+                    idEquipe = Convert.ToInt32(dr["ID_EQUIPE"]),
+                    courriel = dr["COURRIEL"].ToString(),
+                    motDePasse = dr["MOT_PASSE"].ToString(),
+                    nom = dr["NOM"].ToString(),
+                    prenom = dr["PRENOM"].ToString(),
+                    point = Convert.ToInt32(dr["POINT"]),
+                    programme = dr["PROGRAMME_ETUDE"].ToString(),
+                    avatar = dr["AVATAR"].ToString(),
+                    pseudo = dr["PSEUDONYME"].ToString(),
+                    role = Convert.ToInt32(dr["ROLE"]),
+                    devenirCapitaine = Convert.ToBoolean(dr["DEVENIR_CAPITAINE"])
+                };
+                return c;
+            }
+            cnx.Close();
+            return null;
+        }
+
         public static Compte FindCompteByPseudoMdp(string pseudonyme, string mdp)
         {
             Compte compte;

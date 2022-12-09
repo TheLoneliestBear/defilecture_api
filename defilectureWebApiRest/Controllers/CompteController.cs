@@ -31,23 +31,18 @@ namespace defilectureWebApiRest.Controllers
         {
             return ComptesDao.FindAll();
         }
+        */
 
 
-       
-        //Trouver compte par idCompte :
-        public IHttpActionResult Get(int idCompte)
+        //Trouver compte par id :
+        [HttpGet]
+        [Route("api/Compte/{id}")]
+        public Compte Get(int id)
         {
-            Compte compte = ComptesDao.FindByIdCompte(idCompte);
-            if (compte != null)
-            {
-                return this.Ok(compte);
-            }
-            else
-            {
-                return this.NotFound();
-            }
+                return CompteDataProvider.FindByIdCompte(id);
         }
        
+        /*
         //Trouver compte par idEquipe :
 
         //Trouver compte par courriel :
