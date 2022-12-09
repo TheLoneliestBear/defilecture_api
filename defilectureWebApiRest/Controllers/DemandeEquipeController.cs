@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using defilectureWebApiRest.Models.DemandeEquipe;
 
 namespace defilectureWebApiRest.Controllers
@@ -15,22 +15,24 @@ namespace defilectureWebApiRest.Controllers
         public bool Put(DemandeEquipe demande)
         {
             return DemandeEquipeDataProvider.AjouterDemandeEquipage(demande);
-        }   
+        }
 
         //afficher toute les demande:
+        [Route("api/DemandeEquipes")]
         public IEnumerable<DemandeEquipe> Get()
         {
             return DemandeEquipeDataProvider.getDemandes();
         }
 
         //afficher selon le idEquipe:
-        public IEnumerable<DemandeEquipe> GetSelonIdEquipe(int idEquipe)
+        [Route("api/DemandeEquipes/idEquipe/{idEquipe}")]
+        public IEnumerable<DemandeEquipe> Get(int idEquipe)
         {
             return DemandeEquipeDataProvider.afficherDemandeSelonIdEquipe(idEquipe);
         }
 
         //afficher selon le idCompte:
-
+        [Route("api/DemandeEquipes/idCompte/{idCompte}")]
         public IHttpActionResult GetSelonIdCompte(int idCompte)
         {
             DemandeEquipe demande = DemandeEquipeDataProvider.afficherDemandeSelonIdCompte(idCompte);
