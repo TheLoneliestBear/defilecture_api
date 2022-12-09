@@ -1,4 +1,5 @@
-﻿using defilectureWebApiRest.Models.Lecture;
+﻿using defilectureWebApiRest.Models.Compte;
+using defilectureWebApiRest.Models.Lecture;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace defilectureWebApiRest.Controllers
             return LectureDataProvider.GetLectures();
         }
 
+        //Ajout de lecture :
+        // POST api/<controller>
+        public bool Post(Lecture lecture)
+        {
+            return LectureDataProvider.AjouterLecture( lecture );
+        }
 
         // GET api/<controller>/compte/15
         [Route("api/Lectures/compte/{id}")]

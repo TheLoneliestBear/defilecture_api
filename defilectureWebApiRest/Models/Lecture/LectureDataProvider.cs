@@ -77,6 +77,58 @@ namespace defilectureWebApiRest.Models.Lecture
             cnx.Close();
             return liste;
         }
+
+        public static bool AjouterLecture(Lecture lecture)
+        {
+
+            DbConnection cnx = new MySqlConnection();
+            cnx.ConnectionString = connectionString;
+            cnx.Open();
+            DbCommand cmd = cnx.CreateCommand();
+            cmd.CommandText = "INSERT INTO lecture(`ID_COMPTE`,`TITRE`, `DATE_INSCRIPTION`, `DUREE_MINUTES`, `EST_OBLIGATOIRE`) " +
+                                       "VALUES (@idCompte, @titre, @date, @temps, @obligatoire)";
+            DbParameter param;
+            param = new MySqlParameter
+            {
+                ParameterName = "idCompte",
+                DbType = System.Data.DbType.Int32,
+                Value = lecture.idCompte
+            };
+            cmd.Parameters.Add(param);
+            param = new MySqlParameter
+            {
+                ParameterName = "titre",
+                DbType = System.Data.DbType.String,
+                Value = lecture.titre
+            };
+            cmd.Parameters.Add(param);
+            param = new MySqlParameter
+            {
+                ParameterName = "date",
+                DbType = System.Data.DbType.String,
+                Value = lecture.dateInscription
+            };
+            cmd.Parameters.Add(param);
+            param = new MySqlParameter
+            {
+                ParameterName = "temps",
+                DbType = System.Data.DbType.Int32,
+                Value = lecture.tempsLu
+            };
+            cmd.Parameters.Add(param);
+            param = new MySqlParameter
+            {
+                ParameterName = "obligatoire",
+                DbType = System.Data.DbType.Boolean,
+                Value = lecture.estObligatoire
+            };
+
+            cmd.Parameters.Add(param);
+            bool res = cmd.ExecuteNonQuery() > 0;
+            cnx.Close();
+            return res;
+        }
+
         public static bool Supprimer(int idLivre)
         {
 

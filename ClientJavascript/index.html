@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Rest - Défi lecture</title>
+    <script src="config.js">
+    </script>
+    <script src="my_ajax.js">
+    </script>
+    <script>
+        var xho;
+        function go(path, queryString) {
+            var url = Config.BASE_URI;
+            if (path) {
+                url += path;
+            }
+            if (queryString) {
+                url += queryString;
+            }
+            xho = new XMLHttpRequest();
+            xho.onreadystatechange = traiterReponse;
+            try {
+                xho.open("GET", url, true);
+            }
+            catch (e) {
+                alert(e);
+            }
+            xho.send(null)
+        }
+
+        function traiterRéponse() {
+            if (xho.readyState == 4 && xho.status == 200) {
+                try {
+                    var reponse = JSON.parse(s);
+                    document.getElementById("tMoyenne").innerHTML = '';
+                    if (Array.isArray(reponse)) {
+                        if (reponse.length > 0) {
+
+                            var attributs = Object.keys(reponse[0]);
+                            str = "<table><tr>";
+                            for (i = 0; i < attributs.length; i++) {
+                                str += "<th>" + attributs[i] + "</th>";
+                            }
+                            str += "</tr>";
+                            for (i = 0; i < reponse.length; i++) {
+                                element = reponse[i];
+                                str += "<tr>";
+                                for (j = 0; j < attributs.length; j++) {
+                                    str += "<td>" + element[attributs[j]] + "</td>";
+                                }
+                                str += "</tr>";
+                            }
+                            str += "</table>";
+                            document.getElementById("reponse").innerHTML = "REPONSE : <br />" + str;
+                        }
+                    }
+                }
+                catch (e) {
+                            document.getElementById("reponse").innerHTML = "ERREUR : " + e;
+                        }
+                    }
+                    else {
+                        alert("Probleme : " + xho.status + " - " + xho.statusText);
+                    }
+                } window.onload = function () {
+                    document.getElementById("bComptes").onclick = function () {
+
+                        go('/api/Comptes');
+                    }
+                    document.getElementById("bSearchCompte").onclick = function () {
+                        var numero = document.getElementById("tNumero").value;
+                        if (numero == "") {
+                            alert("Saisir l\'id");
+                            return;
+                        }
+                        go('api/Comptes/' + numero);
+                    }
+                    document.getElementById("bSearchCompteParPseudo").onclick = function () {
+                        var nom = document.getElementById("tNom").value;
+                        if (nom == "") {
+                            alert("saisir le nom");
+                            return;
+                        }
+                        go('/api/' + nom);
+                    }
+                    document.getElementById("bMoyenne").onclick = function () {
+                        go('/api/');
+                    }
+
+                }
+
+
+    </script>
+</head>
+
+<body>
+    <h1 class="titre">Tableau de bord Defi Lecture</h1>
+    <form id="form1" runat="server">
+        <div class="main">
+
+            <table style="width:20%; margin-left: 420px;">
+                <tr>
+                    <td>
+                        <input id="tCompte" type="text" />
+                    </td>
+                    <td>
+                        <input id="bSearchCompte" type="button" value="Rechercher Compte par id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="tNom" type="text" />
+                    </td>
+                    <td>
+                        <input id="bSearchCompteParNom" type="button" value="Rechercher un compte par nom" />
+                    </td>
+
+                </tr>
+            </table>
+            <br />
+            <table style="width:28%; margin-left: 420px;">
+                <tr>
+                    <td>
+
+                        <strong>Informations retourne selon la recherche</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style id="tStudent"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="reponse">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="bComptes" type="button" value="Tous les comptes participants" />
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+    </form>
+
+</body>
+
+</html>
