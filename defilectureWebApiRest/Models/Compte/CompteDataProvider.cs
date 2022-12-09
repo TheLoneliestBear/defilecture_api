@@ -1,4 +1,3 @@
-﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -10,7 +9,6 @@ namespace defilectureWebApiRest.Models.Compte
 {
     public class CompteDataProvider
     {
-
         private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
 
         public static Compte FindByIdCompte(int id)

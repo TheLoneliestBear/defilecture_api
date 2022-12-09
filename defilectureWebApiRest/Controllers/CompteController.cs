@@ -17,21 +17,13 @@ namespace defilectureWebApiRest.Controllers
            // ComptesDao.Remplir();
         }
 
-        [HttpGet]
-        [Route("api/Compte/{pseudo}/{mdp}")]
-        public Compte Get(string pseudo, string mdp)
-        {
-            return CompteDataProvider.FindCompteByPseudoMdp(pseudo,mdp);
-        }
 
-        /*
         //Trouver tous les comptes
         // GET api/<controller>
         public IEnumerable<Compte> Get()
         {
             return ComptesDao.FindAll();
         }
-        */
 
 
         //Trouver compte par id :
