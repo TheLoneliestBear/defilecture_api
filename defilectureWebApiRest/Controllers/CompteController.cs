@@ -11,18 +11,12 @@ namespace defilectureWebApiRest.Controllers
 {
     public class CompteController : ApiController
     {
-        //Initialisation de la liste des comptes
-        public CompteController()
-        {
-           // ComptesDao.Remplir();
-        }
-
 
         //Trouver tous les comptes
         // GET api/<controller>
         public IEnumerable<Compte> Get()
         {
-            return ComptesDao.FindAll();
+            return CompteDataProvider.GetComptes();
         }
 
 

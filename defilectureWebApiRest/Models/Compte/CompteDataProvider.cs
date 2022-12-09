@@ -1,3 +1,4 @@
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -10,6 +11,42 @@ namespace defilectureWebApiRest.Models.Compte
     public class CompteDataProvider
     {
         private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
+
+
+        public static List<Compte> GetComptes()
+        {
+            List<Compte> liste = new List<Compte>();
+            Compte compte;
+            DbConnection cnx = new MySqlConnection();
+            cnx.ConnectionString = connectionString;
+            cnx.Open();
+
+            DbCommand cmd = new MySqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT * FROM compte";
+            DbDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                compte = new Compte
+                {
+                    idCompte = Convert.ToInt32(dr["ID_COMPTE"]),
+                    idEquipe = Convert.ToInt32(dr["ID_EQUIPE"]),
+                    courriel = dr["COURRIEL"].ToString(),
+                    motDePasse = dr["MOT_PASSE"].ToString(),
+                    nom = dr["NOM"].ToString(),
+                    prenom = dr["PRENOM"].ToString(),
+                    point = Convert.ToInt32(dr["POINT"]),
+                    programme = dr["PROGRAMME_ETUDE"].ToString(),
+                    avatar = dr["AVATAR"].ToString(),
+                    pseudo = dr["PSEUDONYME"].ToString(),
+                    role = Convert.ToInt32(dr["ROLE"]),
+                    devenirCapitaine = Convert.ToBoolean(dr["DEVENIR_CAPITAINE"])
+                };
+                liste.Add(compte);
+            }
+            cnx.Close();
+            return liste;
+        }
 
         public static Compte FindByIdCompte(int id)
         {
