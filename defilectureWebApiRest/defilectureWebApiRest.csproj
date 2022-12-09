@@ -85,6 +85,10 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -214,6 +218,7 @@
     <Compile Include="Models\Defi\DefiDataProvider.cs" />
     <Compile Include="Models\Equipe\Equipe.cs" />
     <Compile Include="Models\Equipe\EquipeDataProvider.cs" />
+    <Compile Include="Models\Compte\ComptesDao.cs" />
     <Compile Include="Models\Lecture\Lecture.cs" />
     <Compile Include="Models\Lecture\LectureDataProvider.cs" />
     <Compile Include="Models\Question\Question.cs" />
