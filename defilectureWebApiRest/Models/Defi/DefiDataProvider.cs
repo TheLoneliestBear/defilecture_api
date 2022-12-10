@@ -9,7 +9,7 @@ namespace defilectureWebApiRest.Models.Defi
 {
     public class DefiDataProvider
     {
-        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
+        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=;Database=defilecture";
 
 
         public static Defi FindByIdDefi(int id)
