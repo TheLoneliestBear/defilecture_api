@@ -63,6 +63,13 @@ namespace defilectureWebApiRest.Controllers
             return CompteDataProvider.GetComptesByCapitaine(capitaine);
         }
 
+        //Trouver compte par Pseudo et mot de passe:
+        [Route("api/Comptes/connexion/{pseudo}/{mdp}")]
+        public Compte GetByPseudoEtMotdePase(string pseudo, string mdp)
+        {
+            return CompteDataProvider.FindCompteByPseudoMdp(pseudo, mdp);
+        }
+
         //Ajout de compte :
         // POST api/<controller>
         public void Post(Compte compte)
