@@ -475,126 +475,31 @@ namespace defilectureWebApiRest.Models.Compte
             cnx.Close();
         }
 
-        public static bool ModifierCompte(Compte compte)
+        public static void ModifierCompte(Compte compte)
         {
 
             DbConnection cnx = new MySqlConnection();
             cnx.ConnectionString = connectionString;
             cnx.Open();
             DbCommand cmd = cnx.CreateCommand();
-            cmd.CommandText = "UPDATE compte SET ID_EQUIPE=@idEquipe,COURRIEL=@courriel,MOT_PASSE=@motDePasse,NOM=@nom,PRENOM=@prenom," +
-                " PSEUDONYME=@pseudo, ROLE=@role, AVATAR=@avatar, Point=@point, PROGRAMME_ETUDE=@programme, " +
-                "DEVENIR_CAPITAINE=@devenirCapitaine " +
-                              "WHERE ID_COMPTE=@idCompte";
-            DbParameter param;
-            param = new MySqlParameter
-            {
-                ParameterName = "idCompte",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.idEquipe
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "idEquipe",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.idEquipe
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "courriel",
-                DbType = System.Data.DbType.String,
-                Value = compte.courriel
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "motDePasse",
-                DbType = System.Data.DbType.String,
-                Value = compte.motDePasse
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "nom",
-                DbType = System.Data.DbType.String,
-                Value = compte.nom
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "prenom",
-                DbType = System.Data.DbType.String,
-                Value = compte.prenom
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "pseudo",
-                DbType = System.Data.DbType.String,
-                Value = compte.pseudo
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "role",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.role
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "avatar",
-                DbType = System.Data.DbType.String,
-                Value = compte.avatar
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "point",
-                DbType = System.Data.DbType.Int32,
-                Value = compte.point
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "programme",
-                DbType = System.Data.DbType.String,
-                Value = compte.programme
-            };
-            cmd.Parameters.Add(param);
-            param = new MySqlParameter
-            {
-                ParameterName = "devenirCapitaine",
-                DbType = System.Data.DbType.Boolean,
-                Value = compte.devenirCapitaine
-            };
-            cmd.Parameters.Add(param);
-            bool res = cmd.ExecuteNonQuery() > 0;
+            cmd.CommandText =
+                $"UPDATE compte SET ID_EQUIPE = {compte.idEquipe} , COURRIEL = '{compte.courriel}' , MOT_PASSE = '{compte.motDePasse}', NOM = '{compte.nom}', PRENOM = '{compte.prenom}', PSEUDONYME = '{compte.pseudo}' WHERE ID_COMPTE = '{compte.idCompte}'";
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
             cnx.Close();
-            return res;
+             
         }
 
-        public static bool SupprimerCompte(int idCompte)
+        public static void SupprimerCompte(Compte compte)
         {
-
             DbConnection cnx = new MySqlConnection();
             cnx.ConnectionString = connectionString;
             cnx.Open();
             DbCommand cmd = cnx.CreateCommand();
-            cmd.CommandText = "DELETE FROM compte WHERE ID_COMPTE = @idCompte";
-            DbParameter param;
-            param = new MySqlParameter
-            {
-                ParameterName = "idCompte",
-                DbType = System.Data.DbType.Int32,
-                Value = idCompte
-            };
-            cmd.Parameters.Add(param);
-            bool res = cmd.ExecuteNonQuery() > 0;
+            cmd.CommandText = $"DELETE FROM compte WHERE ID_COMPTE = {compte.idCompte}";
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
             cnx.Close();
-            return res;
         }
     }
 }

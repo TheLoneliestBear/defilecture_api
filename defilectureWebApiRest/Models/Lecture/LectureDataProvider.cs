@@ -12,7 +12,7 @@ namespace defilectureWebApiRest.Models.Lecture
     
     public class LectureDataProvider
     {
-        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=;Database=defilecture";
+        private static string connectionString = "Server=127.0.0.1;Uid=root;Pwd=root;Database=defilecture";
 
         
         public static List<Lecture> GetLectures()

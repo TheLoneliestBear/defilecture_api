@@ -81,18 +81,18 @@ namespace defilectureWebApiRest.Controllers
 
         //Modification de compte :
         // PUT api/<controller>/5
-        public bool Put(Compte compte)
+        public void Put(Compte compte)
         {
-            return CompteDataProvider.ModifierCompte(compte);
+            CompteDataProvider.ModifierCompte(compte);
         }
 
 
 
         //Suppression de compte :
         // DELETE api/<controller>/9584512  
-        public bool Delete(int idCompte)
+        public void Delete(Compte compte)
         {
-            return CompteDataProvider.SupprimerCompte(idCompte);
+            CompteDataProvider.SupprimerCompte(compte);
         }
 
         /*
