@@ -21,7 +21,7 @@ namespace defilectureWebApiRest.Controllers
         // POST api/<controller>
         public bool Post(Lecture lecture)
         {
-            return LectureDataProvider.AjouterLecture( lecture );
+            LectureDataProvider.AjouterLecture( lecture );
         }
 
         // GET api/<controller>/compte/15
